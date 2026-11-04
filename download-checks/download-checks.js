@@ -7,8 +7,15 @@ const VIDEO_NAME = 'risk5-pause-resume.webm';
 const VIDEO_SHA256 = '4c3d89f4130a6349bab2a6b9c57066879c95c87f966ca5ff4b8c689e4834184b';
 
 const localServer = location.protocol === 'http:' && location.hostname === 'localhost';
-document.querySelector('#http-download').hidden = !localServer;
 document.querySelector('#http-journal').hidden = !localServer;
+const videoLink = document.querySelector('#slow-download');
+videoLink.href = localServer ? '/slow.webm' : VIDEO_NAME;
+videoLink.addEventListener('click', () => {
+  if (!localServer) {
+    // A fresh URL keeps repeated downloads out of the browser cache.
+    videoLink.href = VIDEO_NAME + '?run=' + Date.now();
+  }
+});
 
 document.querySelector('#blob-download').onclick = () => {
   const url = URL.createObjectURL(new Blob([BLOB_TEXT], {type: 'text/plain;charset=utf-8'}));

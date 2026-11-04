@@ -17,8 +17,9 @@
 <p id="blob-state" role="status"></p>
 <section id="http-download">
 <h2>Пауза и продолжение</h2>
-<p>Файл risk5-pause-resume.webm: 3667214 байт. Сервер отдаёт 8192 байт каждые 250 мс и поддерживает HTTP Range.</p>
-<a id="slow-download" href="/slow.webm" download="risk5-pause-resume.webm">Начать медленную загрузку</a>
+<p>Файл risk5-pause-resume.webm: 3667214 байт.</p>
+<p>До скачивания включите в Charles Throttling для ymbrocore.github.io: 128 Кбит/с (16 КБ/с). Ограничение скорости остаётся включённым до завершения проверки.</p>
+<a id="slow-download" href="risk5-pause-resume.webm" download="risk5-pause-resume.webm">Скачать risk5-pause-resume.webm</a>
 </section>
 <h2>Проверка сохранённого файла</h2>
 <label for="read-file">Выбрать сохранённый файл из загрузок</label>
@@ -30,5 +31,5 @@
 <button id="http-status">Показать журнал HTTP</button>
 <pre id="http-result"></pre>
 </section>
-<script src="download-checks.js"></script>
+<script src="download-checks.js?v=2"></script>
 </html>
