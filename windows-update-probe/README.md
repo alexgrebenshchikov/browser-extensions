@@ -10,9 +10,11 @@
 1. Скачать [windows-update-probe.zip](https://github.com/ymbrocore/browser-extensions/raw/refs/heads/master/windows-update-probe.zip).
 2. Распаковать архив в отдельную папку на устройстве. В ней должны находиться `manifest.json`, `background.js`,
    `popup.html` и `popup.js`.
-3. В отдельном тестовом профиле Яндекс Браузера открыть `browser://extensions` и включить `Developer mode`.
-4. Нажать `Load unpacked extension`. В файловом диалоге Android выбрать `manifest.json` из распакованной папки.
-5. Открыть **Windows Update Probe** через меню расширений Браузера.
+3. В отдельном тестовом профиле Яндекс Браузера открыть `browser://extensions` и включить **Режим разработчика**.
+4. Нажать **Загрузить распакованное расширение**. В файловом диалоге Android открыть папку с `manifest.json`,
+   нажать **Использовать эту папку**, затем **Разрешить**.
+5. Открыть **Меню вкладки** (три точки в строке адреса), прокрутить меню вниз, выбрать **Расширения**, затем
+   **Windows Update Probe**.
 
 ## Проверка
 
