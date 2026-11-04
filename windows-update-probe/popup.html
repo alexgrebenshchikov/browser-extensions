@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windows Update Probe</title>
+<style>
+  body {font: 15px system-ui, sans-serif; margin: 16px; min-width: 280px; max-width: 560px; color: #202124; background: #fff;}
+  h1 {font-size: 20px; margin-top: 0;}
+  button {font: inherit; padding: 10px; margin: 0 4px 8px 0;}
+  pre {white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; background: #f1f3f4; padding: 10px;}
+  #status {white-space: pre-wrap;}
+</style>
+<h1>Windows Update Probe</h1>
+<p>Вызов из фонового обработчика через 30 секунд. После запуска закройте окно расширения.</p>
+<p>normal: оставить веб-вкладку. empty: закрыть все вкладки и оставить Браузер на главном экране.</p>
+<button id="normal">Запустить normal</button>
+<button id="empty">Запустить empty</button>
+<p id="status" role="status" aria-live="polite">Загрузка журнала…</p>
+<button id="cancel">Отменить запуск</button>
+<button id="clear">Очистить журнал</button>
+<button id="export">Сохранить JSON</button>
+<h2>Журнал</h2>
+<pre id="log"></pre>
+<script src="popup.js"></script>
+</html>
