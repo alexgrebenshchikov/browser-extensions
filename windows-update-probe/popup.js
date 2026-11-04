@@ -52,12 +52,16 @@ for (const type of ['cancel', 'clear']) {
   document.querySelector('#' + type).onclick = () => send({type});
 }
 document.querySelector('#export').onclick = () => {
-  const url = URL.createObjectURL(new Blob([JSON.stringify(currentState, null, 2)], {type: 'application/json'}));
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'windows-update-probe.json';
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 10000);
+  const status = document.querySelector('#export-status');
+  status.textContent = 'Сохранение JSON…';
+  chrome.downloads.download({
+    url: 'data:application/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(currentState, null, 2)),
+    filename: 'windows-update-probe.json'
+  }, id => {
+    const error = chrome.runtime.lastError?.message;
+    status.textContent = error ? 'Не удалось сохранить JSON: ' + error :
+      'JSON передан в загрузки, ID: ' + id;
+  });
 };
 chrome.storage.onChanged.addListener(() => render().catch(console.error));
 setInterval(() => render().catch(console.error), 1000);
