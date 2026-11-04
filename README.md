@@ -82,3 +82,10 @@ Use the report as a diagnostic aid and inspect individual errors. The **[origina
 - [Downloads API](https://developer.chrome.com/docs/extensions/reference/api/downloads)
 
 The Chrome documentation describes the upstream API contract. Availability and behavior must also be checked in the target Yandex Browser build and platform.
+
+## Standalone windows.update probe
+
+[Windows Update Probe](windows-update-probe/) is a separate offline extension for the Android empty-window regression.
+[Download windows-update-probe.zip](https://github.com/ymbrocore/browser-extensions/raw/refs/heads/master/windows-update-probe.zip), extract it, and follow the [Russian installation and scenario instructions](windows-update-probe/README.md).
+It schedules normal and empty-window calls with `chrome.alarms` and stores before/after JSON evidence locally.
+No Node.js, server, npm dependencies or network permission is needed.
