@@ -265,7 +265,23 @@ var tabs_test = new TestSet()
 
     // Beta
     .suggest("[Method Exists] discard", methodExists(chrome.tabs, 'discard'), { hideOnSuccess: true })
-    .suggest("[Method Call] discard", methodCall(chrome.tabs, 'discard', () => {}))
+    .suggest("[Method Call] discard", async () => {
+        if (!platformInfoPromise) {
+            platformInfoPromise = callChrome(chrome.runtime, 'getPlatformInfo');
+        }
+        const platformInfo = await platformInfoPromise;
+        if (platformInfo.os !== 'android') {
+            return methodCall(chrome.tabs, 'discard', () => {})();
+        }
+        // Discard a dedicated tab so the test cannot unload its own runner.
+        return withTestTab('https://ya.ru/?api_test=discard', async tab => {
+            const discardedTab = await callChrome(chrome.tabs, 'discard', tab.id);
+            if (!discardedTab || discardedTab.id !== tab.id || !discardedTab.discarded) {
+                throw new Error('The requested test tab was not discarded.');
+            }
+            return '';
+        });
+    }, { timeout: 20000 })
 
     .require("[Event onCreated]", () => {
         return new Promise((resolve, reject) => {
