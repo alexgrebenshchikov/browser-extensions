@@ -1,6 +1,6 @@
 # Browser API Test — Manifest V3
 
-Diagnostic extension for testing browser extension APIs in Yandex Browser on Android and desktop. Extension version: **0.2.1**.
+Diagnostic extension for testing browser extension APIs in Yandex Browser on Android and desktop. Extension version: **0.2.2**.
 
 ## Original project and attribution
 
@@ -28,6 +28,12 @@ Use a dedicated test profile: the suite creates and removes tabs, bookmarks, coo
 - Removed MV2/legacy mechanisms are explicitly marked **SKIP**. A skipped or disabled check does not demonstrate that the corresponding API works.
 
 The **[migration patch](manifest-v3.patch)** records changes against the upstream revision above. Source code is available in **[api-test-extension](api-test-extension)**. No build step is required.
+
+## Discard test isolation in 0.2.2
+
+The discard check now creates a dedicated background tab, waits for it to load, and calls `tabs.discard(tab.id)`. It validates the returned tab ID and discarded state and removes the temporary tab in `finally`, including on API errors. This prevents automatic candidate selection from unloading the test runner itself. The check covers explicit-ID discard; it does not cover automatic selection without an ID or establish the cause of the Chromium 152/154 difference.
+
+Run `node tests/discard.test.cjs` to check explicit targeting, result validation and cleanup with mocked browser APIs.
 
 ## Android compatibility in 0.2.1
 
